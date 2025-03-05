@@ -1,0 +1,17 @@
+# Default replica count for scaling
+replicaCount: 1
+
+# Image configuration updated with the new image reference
+image:
+  repository: "430387712027.dkr.ecr.us-east-1.amazonaws.com/service/test-aman"
+  pullPolicy: IfNotPresent
+  tag: "postman-monitoring-agent-latest-v2"
+
+# Credentials for authentication (replace with your actual values or use a secret)
+credentials:
+  apiKey: "apiKey"
+
+# Additional command-line arguments
+args:
+  cluster: "private-cluster"
+  baseUrl: "baseUrl"
