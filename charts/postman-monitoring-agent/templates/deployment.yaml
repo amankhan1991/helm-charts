@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "private-agent.fullname" . }}
+  labels:
+    app: {{ include "private-agent.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "private-agent.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "private-agent.name" . }}
+    spec:
+      containers:
+        - name: private-agent
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - "--cluster"
+            - "{{ .Values.args.cluster }}"
+            - "--base-url"
+            - "{{ .Values.args.baseUrl }}"
+            - "--api-key"
+            - "{{ .Values.credentials.apiKey }}"
